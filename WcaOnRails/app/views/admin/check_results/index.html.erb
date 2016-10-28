@@ -1,0 +1,37 @@
+<% provide(:title, 'Check Results') %>
+
+<div class="container">
+  <%= render layout: "nav" do %>
+    <h1><%= yield(:title) %></h1>
+
+    <p>First, check the results individually, according to our
+    checking procedure (mostly that value1-value5
+    make sense and that average and best are correct).</p>
+
+    <p>Then, once they're correct individually, check ranks.
+    This compares results with others in the same round to check each
+    competitor's place. Differences between calculated and stored places can be
+    agreed to and then executed on the bottom of the page.
+
+    <p>You can also print similar results that happened during
+    a competition. It might reveal errors in score taking, although some similar
+    results can be due to chance.</p>
+
+    <hr />
+
+    <%= simple_form_for @check_results, method: 'get', url: admin_check_results_path do |f| %>
+      <%= f.input :event_id, collection: Event.official, include_blank: 'All' %>
+      <%= f.input :competition_id, as: :competition_id, only_one: true, placeholder: "All" %>
+      <%= f.input :what, collection: [ "individual results" ], include_blank: "All" %>
+
+      <%= f.submit "Check results", class: "btn btn-success" %>
+    <% end %>
+
+    <% if @warnings %>
+      <% @warnings.each do |warning| %>
+        oh man jack hands on my stack <%= warning %>
+      <% end %>
+    <% end %>
+
+  <% end %>
+</div>
