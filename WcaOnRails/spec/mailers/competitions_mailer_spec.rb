@@ -3,7 +3,7 @@
 require "rails_helper"
 
 RSpec.describe CompetitionsMailer, type: :mailer do
-  describe "notify_board_of_confirmed_competition" do
+  describe "notify_wcat_of_confirmed_competition" do
     let(:senior_delegate) { FactoryBot.create :senior_delegate }
     let(:delegate) { FactoryBot.create :delegate, senior_delegate: senior_delegate }
     let(:second_delegate) { FactoryBot.create :delegate, senior_delegate: senior_delegate }
@@ -11,7 +11,7 @@ RSpec.describe CompetitionsMailer, type: :mailer do
     let(:competition) { FactoryBot.create :competition, :with_competitor_limit, championship_types: %w(world PL), delegates: [delegate, second_delegate, third_delegate] }
     let(:mail) do
       I18n.locale = :pl
-      CompetitionsMailer.notify_board_of_confirmed_competition(delegate, competition)
+      CompetitionsMailer.notify_wcat_of_confirmed_competition(delegate, competition)
     end
 
     it "renders in English" do
